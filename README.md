@@ -9,16 +9,19 @@ Command Line Interface, which is designed to handle things, like Dev(Op) and oth
 Run this from project directory:
 
 ```bash
-go run .
+go run . ip -4 -6
 ```
+
+to detect current IP addresses, e.g.
 
 ## Available commands
 
 A (non complete) list of some interesting commands:
 
 ```
-chuck  # Tries to output a random Chuck Norris joke by using icndb.com service
-ip     # Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service
+chuck         # Tries to output a random Chuck Norris joke by using icndb.com service
+ip            # Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service
+node-install  # Deletes "node_modules" and executes "npm install" with optional "npm update" and "npm audit fix"
 ```
 
 To list all available commands, simply use `--help` option.

@@ -28,6 +28,7 @@ func main() {
 
 	Setup_chuck_Command()
 	Setup_ip_Command()
+	Setup_nodeinstall_Command()
 
 	// parse CLI args
 	commando.Parse(nil)
