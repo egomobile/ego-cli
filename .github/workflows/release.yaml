@@ -1,3 +1,4 @@
+name: Build binaries for release
 
 on: 
   release:
@@ -9,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        goos: [linux, windows, darwin]
-        goarch: ["386", amd64]
+        goos: [darwin, freebsd, linux, openbsd, windows]
+        goarch: ["386", amd64, arm, arm64]
         exclude:  
-          - goarch: "386"
-            goos: darwin 
+          - goarch: [arm, arm64]
+            goos: darwin
     steps:
     - uses: actions/checkout@v2
     - uses: wangyoucao577/go-release-action@v1.18
@@ -21,7 +22,9 @@ jobs:
         github_token: ${{ secrets.GH_PAT }}
         goos: ${{ matrix.goos }}
         goarch: ${{ matrix.goarch }}
-        goversion: "https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz"
+        goversion: "1.16"
+        md5sum: false
+        sha256sum: true
         project_path: "./"
         binary_name: "ego"
         extra_files: LICENSE README.md

@@ -21,3 +21,8 @@ ip  # Tries to detect public IPv4 and IPv6 address(es) by using ipify.org servic
 ```
 
 To list all available commands, simply use `--help` option.
+
+## Credits
+
+* [Go Release Binaries action](https://github.com/marketplace/actions/go-release-binaries)
+* [Modules, used by that stoftware](./go.mod)
