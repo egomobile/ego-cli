@@ -23,7 +23,7 @@ import (
 	"github.com/thatisuday/commando"
 )
 
-func detectIPv4(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
+func ip_detectIPv4(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 	var ipV4OrErrorMsg = ""
 
 	respV4, errV4 := http.Get("https://api.ipify.org/")
@@ -44,7 +44,7 @@ func detectIPv4(args map[string]commando.ArgValue, flags map[string]commando.Fla
 	fmt.Println()
 }
 
-func detectIPv6(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
+func ip_detectIPv6(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 	var ipV6OrErrorMsg = ""
 
 	respV6, errV6 := http.Get("https://api6.ipify.org/")
@@ -65,15 +65,28 @@ func detectIPv6(args map[string]commando.ArgValue, flags map[string]commando.Fla
 	fmt.Println()
 }
 
-func detectIP(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
-	detectIPv4(args, flags)
-	detectIPv6(args, flags)
+func ip_detectIP(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
+	ip4, err := flags["ip4"].GetBool()
+	detectV4 := err != nil || ip4
+
+	ip6, err := flags["ip6"].GetBool()
+	detectV6 := err != nil || ip6
+
+	if detectV4 {
+		ip_detectIPv4(args, flags)
+	}
+
+	if detectV6 {
+		ip_detectIPv6(args, flags)
+	}
 }
 
 func Setup_ip_Command() {
 	commando.
 		Register("ip").
 		SetShortDescription("detect public IP address(es)").
-		SetDescription("Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service.").
-		SetAction(detectIP)
+		SetDescription("Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service").
+		AddFlag("ip4,4", "detect IPv4", commando.Bool, nil).
+		AddFlag("ip6,6", "detect IPv6", commando.Bool, nil).
+		SetAction(ip_detectIP)
 }

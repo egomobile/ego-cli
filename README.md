@@ -17,7 +17,8 @@ go run .
 A (non complete) list of some interesting commands:
 
 ```
-ip  # Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service.
+chuck  # Tries to output a random Chuck Norris joke by using icndb.com service
+ip     # Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service
 ```
 
 To list all available commands, simply use `--help` option.
