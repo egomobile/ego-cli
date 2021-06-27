@@ -72,6 +72,11 @@ func ip_detectIP(args map[string]commando.ArgValue, flags map[string]commando.Fl
 	ip6, err := flags["ip6"].GetBool()
 	detectV6 := err != nil || ip6
 
+	if !detectV4 && !detectV6 {
+		detectV4 = true
+		detectV6 = true
+	}
+
 	if detectV4 {
 		ip_detectIPv4(args, flags)
 	}
