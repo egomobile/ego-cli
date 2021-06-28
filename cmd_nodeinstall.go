@@ -26,7 +26,7 @@ import (
 	"github.com/thatisuday/commando"
 )
 
-func nodeInstall(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
+func nodeinstall_run(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 	audit, err := flags["audit"].GetBool()
 	runAuditFix := err != nil || audit
 
@@ -125,5 +125,5 @@ func Setup_nodeinstall_Command() {
 		SetDescription("Deletes \"node_modules\" and executes \"npm install\" with optional \"npm update\" and \"npm audit fix\"").
 		AddFlag("audit,a", "run \"audit fix\" after \"install\" or \"update\"", commando.Bool, nil).
 		AddFlag("update,u", "run \"update\" after \"install\"", commando.Bool, nil).
-		SetAction(nodeInstall)
+		SetAction(nodeinstall_run)
 }

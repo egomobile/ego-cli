@@ -86,9 +86,9 @@ func ip_detectIP(args map[string]commando.ArgValue, flags map[string]commando.Fl
 	}
 }
 
-func Setup_ip_Command() {
+func Setup_publicip_Command() {
 	commando.
-		Register("ip").
+		Register("public-ip").
 		SetShortDescription("detect public IP address(es)").
 		SetDescription("Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service").
 		AddFlag("ip4,4", "detect IPv4", commando.Bool, nil).

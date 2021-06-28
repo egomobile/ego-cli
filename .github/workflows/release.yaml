@@ -31,4 +31,4 @@ jobs:
         sha256sum: true
         project_path: "./"
         binary_name: "ego"
-        extra_files: LICENSE README.md
+        extra_files: LICENSE

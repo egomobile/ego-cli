@@ -1,6 +1,6 @@
 # ego-cli
 
-Command Line Interface, which is designed to handle things, like Dev(Op) and other common tasks, much faster.
+Command Line Interface, which is designed to handle things, like Dev(Op) and other common tasks, much faster, written in [Go](https://golang.org/).
 
 > ⚠️⚠️⚠️ **This project will be a refactored version of the legacy npm application [ego-cli](https://github.com/egodigital/ego-cli), written in Go as native binaries.** ⚠️⚠️⚠️
 
@@ -19,9 +19,11 @@ to detect current IP addresses, e.g.
 A (non complete) list of some interesting commands:
 
 ```
-chuck         # Tries to output a random Chuck Norris joke by using icndb.com service
-ip            # Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service
+chuck         # Tries to output a random Chuck Norris joke by using icndb.com
+local-ip      # Lists all IP addresses of all known network interfaces
+service
 node-install  # Deletes "node_modules" and executes "npm install" with optional "npm update" and "npm audit fix"
+public-ip     # Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service
 ```
 
 To list all available commands, simply use `--help` option.

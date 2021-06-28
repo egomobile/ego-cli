@@ -27,8 +27,9 @@ func main() {
 		SetDescription("Command Line Interface, which is designed to handle things, like Dev(Op) and other common tasks, much faster")
 
 	Setup_chuck_Command()
-	Setup_ip_Command()
+	Setup_localip_Command()
 	Setup_nodeinstall_Command()
+	Setup_publicip_Command()
 
 	// parse CLI args
 	commando.Parse(nil)
