@@ -23,7 +23,7 @@ func main() {
 	// setup commando
 	commando.
 		SetExecutableName("ego").
-		SetVersion("0.1.0").
+		SetVersion("0.5.0").
 		SetDescription("Command Line Interface, which is designed to handle things, like Dev(Op) and other common tasks, much faster")
 
 	Setup_chuck_Command()
