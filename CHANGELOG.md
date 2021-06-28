@@ -2,7 +2,7 @@
 
 ## 0.5.0
 
-* add `git-sync`, `local-ip` commands
+* add `git-pull`, `git-push`, `git-sync`, `local-ip` commands
 * rename `ip` command to `public-ip`
 * bugfixes
 

@@ -27,6 +27,8 @@ func main() {
 		SetDescription("Command Line Interface, which is designed to handle things, like Dev(Op) and other common tasks, much faster")
 
 	Setup_chuck_Command()
+	Setup_gitpull_Command()
+	Setup_gitpush_Command()
 	Setup_gitsync_Command()
 	Setup_localip_Command()
 	Setup_nodeinstall_Command()

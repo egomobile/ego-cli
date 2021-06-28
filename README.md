@@ -20,7 +20,9 @@ A (non complete) list of some interesting commands:
 
 ```
 chuck         # Tries to output a random Chuck Norris joke by using icndb.com
-git-sync      # Does a "pull" and "push" in one command, in the current branch for all remotes
+git-pull      # Does a \"git pull\", in the current branch for all remotes in one command
+git-push      # Does a \"git push\", in the current branch for all remotes in one command
+git-sync      # Does a git "pull" and "push" in one command, in the current branch for all remotes
 local-ip      # Lists all IP addresses of all known network interfaces service
 node-install  # Deletes "node_modules" and executes "npm install" with optional "npm update" and "npm audit fix"
 public-ip     # Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service
