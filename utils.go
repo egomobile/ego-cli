@@ -17,10 +17,67 @@ package main
 
 import (
 	"os"
+	"os/exec"
+	"strings"
 	"time"
 
 	"github.com/briandowns/spinner"
 )
+
+type GitBranchAndRemotes struct {
+	Branch  string
+	Remotes []string
+}
+
+// GetGitBranchAndRemotes detects the current branch
+// and all remotes of the current working directory
+func GetGitBranchAndRemotes() (GitBranchAndRemotes, error) {
+	var repo GitBranchAndRemotes
+
+	cwd, err := os.Getwd()
+	if err != nil {
+		return repo, err
+	}
+
+	cmd := exec.Command("git", "rev-parse", "--abbrev-ref", "HEAD")
+	cmd.Dir = cwd
+
+	output, err := cmd.Output()
+	if err != nil {
+		return repo, err
+	}
+
+	repo.Branch = strings.TrimSpace(strings.Join(SplitStringAndCleanup(string(output), "\n"), "\n"))
+
+	cmd = exec.Command("git", "remote")
+	cmd.Dir = cwd
+
+	output, err = cmd.Output()
+	if err != nil {
+		return repo, err
+	}
+
+	repo.Remotes = SplitStringAndCleanup(string(output), "\n")
+
+	return repo, nil
+}
+
+// SplitStringAndCleanup splits a string in s using a separator in sep
+// and removes all empty lines
+func SplitStringAndCleanup(s string, sep string) []string {
+	var result []string
+
+	lines := strings.Split(s, sep)
+	for _, l := range lines {
+		var strToAdd = strings.TrimSpace(l)
+
+		if len(strToAdd) > 0 {
+			result = append(result, strToAdd)
+		}
+	}
+
+	return result
+}
 
 // WithSpinner invokes and action by using an initial preifx text
 func WithSpinner(text string, action func(s *spinner.Spinner)) {

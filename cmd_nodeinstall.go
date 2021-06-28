@@ -28,10 +28,10 @@ import (
 
 func nodeinstall_run(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 	audit, err := flags["audit"].GetBool()
-	runAuditFix := err != nil || audit
+	runAuditFix := err == nil && audit
 
 	update, err := flags["update"].GetBool()
-	runUpdate := err != nil || update
+	runUpdate := err == nil && update
 
 	cwd, err := os.Getwd()
 	if err != nil {
@@ -64,7 +64,7 @@ func nodeinstall_run(args map[string]commando.ArgValue, flags map[string]command
 
 		err := cmd.Run()
 		if err != nil {
-			output, err2 := cmd.CombinedOutput()
+			output, err2 := cmd.Output()
 			if err2 != nil {
 				log.Fatal(err)
 			} else {
@@ -84,7 +84,7 @@ func nodeinstall_run(args map[string]commando.ArgValue, flags map[string]command
 
 			err := cmd.Run()
 			if err != nil {
-				output, err2 := cmd.CombinedOutput()
+				output, err2 := cmd.Output()
 				if err2 != nil {
 					log.Fatal(err)
 				} else {
@@ -105,7 +105,7 @@ func nodeinstall_run(args map[string]commando.ArgValue, flags map[string]command
 
 			err := cmd.Run()
 			if err != nil {
-				output, err2 := cmd.CombinedOutput()
+				output, err2 := cmd.Output()
 				if err2 != nil {
 					log.Fatal(err)
 				} else {

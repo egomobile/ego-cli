@@ -67,10 +67,10 @@ func ip_detectIPv6(args map[string]commando.ArgValue, flags map[string]commando.
 
 func ip_detectIP(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 	ip4, err := flags["ip4"].GetBool()
-	detectV4 := err != nil || ip4
+	detectV4 := err == nil && ip4
 
 	ip6, err := flags["ip6"].GetBool()
-	detectV6 := err != nil || ip6
+	detectV6 := err == nil && ip6
 
 	if !detectV4 && !detectV6 {
 		detectV4 = true

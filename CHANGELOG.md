@@ -2,8 +2,9 @@
 
 ## 0.5.0
 
-* add `local-ip` command
+* add `git-sync`, `local-ip` commands
 * rename `ip` command to `public-ip`
+* bugfixes
 
 ## 0.4.0
 

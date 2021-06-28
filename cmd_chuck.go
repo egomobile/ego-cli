@@ -39,7 +39,7 @@ func chuck_getJoke(args map[string]commando.ArgValue, flags map[string]commando.
 	var jokeOrError = ""
 
 	explicit, err := flags["explicit"].GetBool()
-	withExplicit := err != nil || explicit
+	withExplicit := err == nil && explicit
 
 	var url = "https://api.icndb.com/jokes/random?escape=javascript"
 

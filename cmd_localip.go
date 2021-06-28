@@ -25,7 +25,7 @@ import (
 
 func localip_run(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 	ipOnly, err := flags["ip-only"].GetBool()
-	outputIPAddressesOnly := err != nil || ipOnly
+	outputIPAddressesOnly := err == nil && ipOnly
 
 	ifaces, err := net.Interfaces()
 
