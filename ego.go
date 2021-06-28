@@ -23,7 +23,7 @@ func main() {
 	// setup commando
 	commando.
 		SetExecutableName("ego").
-		SetVersion("0.5.0").
+		SetVersion("0.6.0").
 		SetDescription("Command Line Interface, which is designed to handle things, like Dev(Op) and other common tasks, much faster")
 
 	Setup_chuck_Command()
@@ -33,6 +33,7 @@ func main() {
 	Setup_localip_Command()
 	Setup_nodeinstall_Command()
 	Setup_publicip_Command()
+	Setup_serve_Command()
 
 	// parse CLI args
 	commando.Parse(nil)

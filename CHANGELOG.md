@@ -1,5 +1,9 @@
 # Change Log (ego-cli)
 
+## 0.6.0
+
+* add `serve` command
+
 ## 0.5.0
 
 * add `git-pull`, `git-push`, `git-sync`, `local-ip` commands
