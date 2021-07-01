@@ -112,12 +112,31 @@ func serve_listDirectory(dir string, w http.ResponseWriter, req *http.Request) {
 		return strings.Compare(nameX, nameY) < 0
 	})
 
-	var h = "<html>"
-	h += "<head>"
-	h += "<title>e.GO CLI</title>"
-	h += "</head>"
+	// page title
+	t := "Index of " + req.URL.Path
 
-	h += "<body>"
+	// custom CSS
+	c := `
+.ego-col-name {
+}
+
+.ego-col-last-modified {
+	text-align: center;
+	width: 256px;
+}
+
+.ego-col-size {
+	width: 192px;
+	text-align: right;
+}
+`
+
+	// custom JavaScript
+	j := ""
+
+	// output HTML
+	var h = "<div class=\"container\">"
+
 	h += "<h1>Index of " + html.EscapeString(req.URL.Path) + "</h1>"
 
 	if req.URL.Path != "/" {
@@ -141,13 +160,13 @@ func serve_listDirectory(dir string, w http.ResponseWriter, req *http.Request) {
 	}
 
 	if len(items) > 0 {
-		h += "<table>"
+		h += "<table class=\"table table-striped table-hover\">"
 
 		h += "<thead>"
 		h += "<tr>"
-		h += "<th>&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;</th>"
-		h += "<th>&nbsp;&nbsp;&nbsp;Last modified&nbsp;&nbsp;&nbsp;</th>"
-		h += "<th align=\"right\">&nbsp;&nbsp;&nbsp;Size&nbsp;&nbsp;&nbsp;</th>"
+		h += "<th class=\"ego-col-name\" scope=\"col\">Name</th>"
+		h += "<th class=\"ego-col-last-modified\" scope=\"col\">Last modified</th>"
+		h += "<th class=\"ego-col-size\" scope=\"col\">Size</th>"
 		h += "</tr>"
 		h += "</thead>"
 
@@ -157,17 +176,20 @@ func serve_listDirectory(dir string, w http.ResponseWriter, req *http.Request) {
 			var urlPath = filepath.Join(req.URL.Path, i.PathName)
 
 			var name = html.EscapeString(i.Name)
+
 			var href = html.EscapeString(urlPath)
-			var size = html.EscapeString("-")
+			var size string
 			var lastModified = html.EscapeString(i.File.ModTime().Format(time.RFC3339))
-			if !i.File.IsDir() {
+			if i.File.IsDir() {
+				size = html.EscapeString("<DIR>")
+			} else {
 				size = html.EscapeString(strconv.FormatInt(i.File.Size(), 10))
 			}
 
 			h += "<tr>"
-			h += "<td>&nbsp;&nbsp;&nbsp;<a href=\"" + href + "\">" + name + "</a>&nbsp;&nbsp;&nbsp;</td>"
-			h += "<td>&nbsp;&nbsp;&nbsp;" + lastModified + "&nbsp;&nbsp;&nbsp;</td>"
-			h += "<td align=\"right\">&nbsp;&nbsp;&nbsp;" + size + "&nbsp;&nbsp;&nbsp;</td>"
+			h += "<td class=\"ego-col-name\"><a href=\"" + href + "\">" + name + "</a></td>"
+			h += "<td class=\"ego-col-last-modified\">" + lastModified + "</td>"
+			h += "<td class=\"ego-col-size\">" + size + "</td>"
 			h += "</tr>"
 		}
 
@@ -176,19 +198,14 @@ func serve_listDirectory(dir string, w http.ResponseWriter, req *http.Request) {
 		h += "</table>"
 	}
 
-	h += "<hr>"
+	h += "</div>"
 
-	var footerText = fmt.Sprintf("<a href=\"https://github.com/egomobile/ego-cli\" target=\"_blank\">ego-cli/%v</a>", html.EscapeString(commando.DefaultCommandRegistry.Version))
-	footerText += fmt.Sprintf(" Server at %v", html.EscapeString(req.Host))
+	outputHTML, err := BuildHtmlPage(h, t, c, j)
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
 
-	h += "<div>" + footerText + "</div>"
-
-	h += "</body>"
-
-	h += "</html>"
-
-	w.WriteHeader(200)
-	w.Write([]byte(h))
+	w.Write([]byte(outputHTML))
 }
 
 func serve_sendError(err error, w http.ResponseWriter, req *http.Request) {

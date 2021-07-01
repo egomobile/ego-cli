@@ -16,13 +16,63 @@
 package main
 
 import (
+	"embed"
+	b64 "encoding/base64"
+	"html"
 	"os"
 	"os/exec"
 	"strings"
 	"time"
 
 	"github.com/briandowns/spinner"
+	"github.com/thatisuday/commando"
 )
+
+// www holds static web server content
+//go:embed www/*
+var www embed.FS
+
+func BuildHtmlPage(content string, title string, css string, js string) (string, error) {
+	indexHtml, err := GetWWW().ReadFile("www/index.html")
+	if err != nil {
+		return "", err
+	}
+
+	bootstrapCSS, err := www.ReadFile("www/css/bootstrap.min.css")
+	if err != nil {
+		return "", err
+	}
+
+	bootstrapJS, err := www.ReadFile("www/js/bootstrap.bundle.min.js")
+	if err != nil {
+		return "", err
+	}
+
+	egoLogoSVG, err := www.ReadFile("www/img/ego.svg")
+	if err != nil {
+		return "", err
+	}
+
+	egoLogo := b64.StdEncoding.EncodeToString([]byte(egoLogoSVG))
+	egoLogo = "data:image/svg+xml;base64," + egoLogo
+
+	titleSuffix := strings.TrimSpace(title)
+	if titleSuffix != "" {
+		titleSuffix = " :: " + titleSuffix
+	}
+
+	var h = string(indexHtml)
+	h = strings.ReplaceAll(h, "<EGO-PAGE-TITLE-SUFFIX />", html.EscapeString(titleSuffix))
+	h = strings.ReplaceAll(h, "<EGO-LOGO />", egoLogo)
+	h = strings.ReplaceAll(h, "<EGO-HTML />", content)
+	h = strings.ReplaceAll(h, "<EGO-BOOTSTRAP-CSS />", string(bootstrapCSS))
+	h = strings.ReplaceAll(h, "<EGO-BOOTSTRAP-JS />", string(bootstrapJS))
+	h = strings.ReplaceAll(h, "<EGO-CSS />", css)
+	h = strings.ReplaceAll(h, "<EGO-JS />", js)
+	h = strings.ReplaceAll(h, "<EGO-APP-VERSION />", html.EscapeString(commando.DefaultCommandRegistry.Version))
+
+	return h, nil
+}
 
 type GitBranchAndRemotes struct {
 	Branch  string
@@ -60,6 +110,10 @@ func GetGitBranchAndRemotes() (GitBranchAndRemotes, error) {
 	repo.Remotes = SplitStringAndCleanup(string(output), "\n")
 
 	return repo, nil
+}
+
+func GetWWW() embed.FS {
+	return www
 }
 
 // SplitStringAndCleanup splits a string in s using a separator in sep

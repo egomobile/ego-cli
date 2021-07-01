@@ -33,5 +33,6 @@ To list all available commands, simply use `--help` option.
 
 ## Credits
 
+* [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 * [Go Release Binaries action](https://github.com/marketplace/actions/go-release-binaries)
-* [Modules, used by that stoftware](./go.mod)
+* [Modules, used by that stoftware](https://github.com/egomobile/ego-cli/blob/master/go.mod)

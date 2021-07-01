@@ -1,0 +1,2 @@
+- www/images/ego.svg:
+  Next.e.GO Mobile SE, https://e-go-mobile.com/
