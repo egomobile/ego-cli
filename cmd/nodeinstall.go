@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-package main
+package cmd
 
 import (
 	"fmt"
@@ -24,6 +24,8 @@ import (
 
 	"github.com/briandowns/spinner"
 	"github.com/thatisuday/commando"
+
+	utils "github.com/egomobile/ego-cli/utils"
 )
 
 func nodeinstall_run(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
@@ -47,7 +49,7 @@ func nodeinstall_run(args map[string]commando.ArgValue, flags map[string]command
 
 	// remove node_modules?
 	if _, err := os.Stat(node_modules); !os.IsNotExist(err) {
-		WithSpinner("Removing node_modules/ folder ...", func(s *spinner.Spinner) {
+		utils.WithSpinner("Removing node_modules/ folder ...", func(s *spinner.Spinner) {
 			err = os.RemoveAll(node_modules)
 			if err != nil {
 				log.Fatal(err)
@@ -58,7 +60,7 @@ func nodeinstall_run(args map[string]commando.ArgValue, flags map[string]command
 	}
 
 	// execute npm install
-	WithSpinner("Executing npm install ...", func(s *spinner.Spinner) {
+	utils.WithSpinner("Executing npm install ...", func(s *spinner.Spinner) {
 		cmd := exec.Command("npm", "install")
 		cmd.Dir = cwd
 
@@ -78,7 +80,7 @@ func nodeinstall_run(args map[string]commando.ArgValue, flags map[string]command
 	if runUpdate {
 		// run npm update
 
-		WithSpinner("Executing npm update ...", func(s *spinner.Spinner) {
+		utils.WithSpinner("Executing npm update ...", func(s *spinner.Spinner) {
 			cmd := exec.Command("npm", "update")
 			cmd.Dir = cwd
 
@@ -99,7 +101,7 @@ func nodeinstall_run(args map[string]commando.ArgValue, flags map[string]command
 	if runAuditFix {
 		// run npm audit fix
 
-		WithSpinner("Executing npm audit fix ...", func(s *spinner.Spinner) {
+		utils.WithSpinner("Executing npm audit fix ...", func(s *spinner.Spinner) {
 			cmd := exec.Command("npm", "audit", "fix")
 			cmd.Dir = cwd
 

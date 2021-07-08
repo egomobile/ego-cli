@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-package main
+package cmd
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ import (
 	"github.com/thatisuday/commando"
 )
 
-func ip_detectIPv4(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
+func publicip_detectIPv4(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 	var ipV4OrErrorMsg = ""
 
 	respV4, errV4 := http.Get("https://api.ipify.org/")
@@ -44,7 +44,7 @@ func ip_detectIPv4(args map[string]commando.ArgValue, flags map[string]commando.
 	fmt.Println()
 }
 
-func ip_detectIPv6(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
+func publicip_detectIPv6(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 	var ipV6OrErrorMsg = ""
 
 	respV6, errV6 := http.Get("https://api6.ipify.org/")
@@ -65,7 +65,7 @@ func ip_detectIPv6(args map[string]commando.ArgValue, flags map[string]commando.
 	fmt.Println()
 }
 
-func ip_detectIP(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
+func publicip_detectIP(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 	ip4, err := flags["ip4"].GetBool()
 	detectV4 := err == nil && ip4
 
@@ -78,11 +78,11 @@ func ip_detectIP(args map[string]commando.ArgValue, flags map[string]commando.Fl
 	}
 
 	if detectV4 {
-		ip_detectIPv4(args, flags)
+		publicip_detectIPv4(args, flags)
 	}
 
 	if detectV6 {
-		ip_detectIPv6(args, flags)
+		publicip_detectIPv6(args, flags)
 	}
 }
 
@@ -93,5 +93,5 @@ func Setup_publicip_Command() {
 		SetDescription("Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service").
 		AddFlag("ip4,4", "detect IPv4", commando.Bool, nil).
 		AddFlag("ip6,6", "detect IPv6", commando.Bool, nil).
-		SetAction(ip_detectIP)
+		SetAction(publicip_detectIP)
 }

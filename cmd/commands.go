@@ -13,23 +13,16 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-package main
+package cmd
 
-import (
-	cmd "github.com/egomobile/ego-cli/cmd"
-
-	"github.com/thatisuday/commando"
-)
-
-func main() {
-	// setup commando
-	commando.
-		SetExecutableName("ego").
-		SetVersion("0.7.0").
-		SetDescription("Command Line Interface, which is designed to handle things, like Dev(Op) and other common tasks, much faster")
-
-	cmd.Execute()
-
-	// parse CLI args
-	commando.Parse(nil)
+func Execute() {
+	Setup_chuck_Command()
+	Setup_gitpull_Command()
+	Setup_gitpush_Command()
+	Setup_gitsync_Command()
+	Setup_localip_Command()
+	Setup_nodeinstall_Command()
+	Setup_publicip_Command()
+	Setup_qr_Command()
+	Setup_serve_Command()
 }

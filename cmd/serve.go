@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-package main
+package cmd
 
 import (
 	"fmt"
@@ -31,6 +31,8 @@ import (
 
 	"github.com/gabriel-vasile/mimetype"
 	"github.com/thatisuday/commando"
+
+	utils "github.com/egomobile/ego-cli/utils"
 )
 
 type HttpServerItem struct {
@@ -200,7 +202,7 @@ func serve_listDirectory(dir string, w http.ResponseWriter, req *http.Request) {
 
 	h += "</div>"
 
-	outputHTML, err := BuildHtmlPage(h, t, c, j)
+	outputHTML, err := utils.BuildHtmlPage(h, t, c, j)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}

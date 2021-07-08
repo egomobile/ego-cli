@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-package main
+package cmd
 
 import (
 	"fmt"
@@ -23,10 +23,12 @@ import (
 
 	"github.com/briandowns/spinner"
 	"github.com/thatisuday/commando"
+
+	utils "github.com/egomobile/ego-cli/utils"
 )
 
-func gitpull_run(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
-	repo, err := GetGitBranchAndRemotes()
+func gitpush_run(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
+	repo, err := utils.GetGitBranchAndRemotes()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -37,8 +39,8 @@ func gitpull_run(args map[string]commando.ArgValue, flags map[string]commando.Fl
 	}
 
 	for _, r := range repo.Remotes {
-		WithSpinner("Pulling from '"+r+"' ...", func(s *spinner.Spinner) {
-			cmd := exec.Command("git", "pull", r, repo.Branch)
+		utils.WithSpinner("Pushing to '"+r+"' ...", func(s *spinner.Spinner) {
+			cmd := exec.Command("git", "push", r, repo.Branch)
 			cmd.Dir = cwd
 
 			err := cmd.Run()
@@ -56,10 +58,10 @@ func gitpull_run(args map[string]commando.ArgValue, flags map[string]commando.Fl
 	}
 }
 
-func Setup_gitpull_Command() {
+func Setup_gitpush_Command() {
 	commando.
-		Register("git-pull").
-		SetShortDescription("git pull").
-		SetDescription("Does a \"git pull\", in the current branch for all remotes in one command").
-		SetAction(gitpull_run)
+		Register("git-push").
+		SetShortDescription("git push").
+		SetDescription("Does a \"git push\", in the current branch for all remotes in one command").
+		SetAction(gitpush_run)
 }

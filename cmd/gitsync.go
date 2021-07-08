@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-package main
+package cmd
 
 import (
 	"fmt"
@@ -23,13 +23,15 @@ import (
 
 	"github.com/briandowns/spinner"
 	"github.com/thatisuday/commando"
+
+	utils "github.com/egomobile/ego-cli/utils"
 )
 
 func gitsync_run(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 	reverse, err := flags["reverse"].GetBool()
 	pushThenPull := err == nil && reverse
 
-	repo, err := GetGitBranchAndRemotes()
+	repo, err := utils.GetGitBranchAndRemotes()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -40,7 +42,7 @@ func gitsync_run(args map[string]commando.ArgValue, flags map[string]commando.Fl
 	}
 
 	var pull = func(remote string) {
-		WithSpinner("Pulling from '"+remote+"' ...", func(s *spinner.Spinner) {
+		utils.WithSpinner("Pulling from '"+remote+"' ...", func(s *spinner.Spinner) {
 			cmd := exec.Command("git", "pull", remote, repo.Branch)
 			cmd.Dir = cwd
 
@@ -59,7 +61,7 @@ func gitsync_run(args map[string]commando.ArgValue, flags map[string]commando.Fl
 	}
 
 	var push = func(remote string) {
-		WithSpinner("Pushing to '"+remote+"' ...", func(s *spinner.Spinner) {
+		utils.WithSpinner("Pushing to '"+remote+"' ...", func(s *spinner.Spinner) {
 			cmd := exec.Command("git", "push", remote, repo.Branch)
 			cmd.Dir = cwd
 

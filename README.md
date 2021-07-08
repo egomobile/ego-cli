@@ -26,6 +26,7 @@ git-sync      # Does a git "pull" and "push" in one command, in the current bran
 local-ip      # Lists all IP addresses of all known network interfaces service
 node-install  # Deletes "node_modules" and executes "npm install" with optional "npm update" and "npm audit fix"
 public-ip     # Tries to detect public IPv4 and IPv6 address(es) by using ipify.org service
+qr            # Generates a QR code image in the current directory
 serve         # Starts a HTTP server, serving the files in the current directory
 ```
 
