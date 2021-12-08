@@ -63,7 +63,9 @@ func qr_generate(args map[string]commando.ArgValue, flags map[string]commando.Fl
 		log.Fatal(err)
 	}
 
-	png, err := qrcode.Encode("https://example.org", recoveryLevel, size)
+	text := args["text"].Value
+
+	png, err := qrcode.Encode(text, recoveryLevel, size)
 	if err != nil {
 		log.Fatal(err)
 	}
