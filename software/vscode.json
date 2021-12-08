@@ -1,0 +1,40 @@
+{
+    "description": "A free source-code editor made for Windows, Linux and macOS.",
+    "homepage": "https://code.visualstudio.com/",
+    "maintainer": {
+        "name": "Marcel Kloubert",
+        "homepage": "https://github.com/mkloubert",
+        "email": "marcel.kloubert@gmx.net"
+    },
+    "author": {
+        "name": "Microsoft",
+        "homepage": "https://www.microsoft.com/"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/microsoft/vscode"
+        }
+    ],
+    "sources": {
+        "debian,ubuntu": {
+            "x32,x64": {
+                "requirements": [
+                    "apt://wget",
+                    "apt://apt-transport-https"
+                ],
+                "source": "apt://code"
+            }
+        },
+        "macos": {
+            "*": {
+                "source": "brew://visual-studio-code"
+            }
+        },
+        "windows": {
+            "x64": {
+                "source": "winget://Microsoft.VisualStudioCode"
+            }
+        }
+    }
+}

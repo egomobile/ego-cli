@@ -1,0 +1,42 @@
+{
+    "description": "Natvie command line interface, which is designed to handle things, like Dev(Op) and other common tasks, much faster.",
+    "homepage": "https://github.com/egomobile/ego-cli#readme",
+    "maintainer": {
+        "name": "Marcel Kloubert",
+        "homepage": "https://github.com/mkloubertego",
+        "email": "marcel.kloubert@e-go-mobile.com"
+    },
+    "author": {
+        "name": "e.GO Mobile",
+        "homepage": "https://e-go-mobile.com/"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/egomobile/ego-cli"
+        }
+    ],
+    "sources": {
+        "linux": {
+            "x32": {
+                "source": "https://github.com/egomobile/ego-cli/releases/download/v0.8.0/ego-v0.8.0-linux-386.tar.gz"
+            },
+            "x64": {
+                "source": "https://github.com/egomobile/ego-cli/releases/download/v0.8.0/ego-v0.8.0-linux-arm64.tar.gz"
+            }
+        },
+        "macos": {
+            "x64": {
+                "source": "https://github.com/egomobile/ego-cli/releases/download/v0.8.0/ego-v0.8.0-darwin-amd64.tar.gz"
+            }
+        },
+        "windows": {
+            "x32": {
+                "source": "https://github.com/egomobile/ego-cli/releases/download/v0.8.0/ego-v0.8.0-windows-386.zip"
+            },
+            "x64": {
+                "source": "https://github.com/egomobile/ego-cli/releases/download/v0.8.0/ego-v0.8.0-windows-amd64.zip"
+            }
+        }
+    }
+}
