@@ -109,10 +109,13 @@ type SoftwarePackageSourceCodeRepository struct {
 // separated by commas, if needed
 type SoftwarePackageSourcePlatforms = map[string]SoftwarePackageSourcePlatformArchitectures
 
+// TODO: update to "master"
+const repoBranchUrl = "feature/install"
+
 func downloadSoftwareRepositoryFileList() ([]string, error) {
 	// download file tree of repository on GitHib
-	// TODO: remove branch and change to master
-	resp, err := http.Get("https://api.github.com/repos/egomobile/ego-cli/git/trees/feature/install?recursive=1")
+	// TODO: update repoBranchUrl to "master"
+	resp, err := http.Get("https://api.github.com/repos/egomobile/ego-cli/git/trees/" + repoBranchUrl + "?recursive=1")
 	if err != nil {
 		return nil, err
 	}
@@ -136,9 +139,8 @@ func downloadSoftwareRepositoryFileList() ([]string, error) {
 		for _, treeItem := range filesAndFolders.Tree {
 			if strings.HasPrefix(treeItem.Path, "software/") { // only if in software/ sub folder
 				if strings.HasSuffix(treeItem.Path, ".json") { // only JSON files
-					// TODO: remove branch and change to master
-					// fullUrl := "https://raw.githubusercontent.com/egomobile/ego-cli/master/" + treeItem.Path
-					fullUrl := "https://raw.githubusercontent.com/egomobile/ego-cli/feature/install/" + treeItem.Path
+					// TODO: update repoBranchUrl to "master"
+					fullUrl := "https://raw.githubusercontent.com/egomobile/ego-cli/" + repoBranchUrl + "/" + treeItem.Path
 
 					urls = append(urls, fullUrl)
 				}
