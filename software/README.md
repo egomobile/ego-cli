@@ -2,14 +2,15 @@
 {
     "description": "Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam, qui ipsorum lingua Celtae, nostra Galli appellantur.",  # some words about that package
     "homepage": "https://github.com/egomobile/ego-cli#README", # url to a home with some information
-    "maintainer": { # (optional) some information about the maintainer
+    "maintainer": { # some information about the maintainer
         "name": "e.GO Mobile", # the (nick-)name
         "homepage": "https://github.com/egomobile", # if no homepage is available, maybe the user's github page
-        "email": "foo@example.com" # (optional) the contact mail
+        "contacts": ["mailto:foo@example.com"] # (optional) list of contact addresses
     },
     "author": { # (optional) some information of the author
         "name": "", # the name of the author, (nick-)name or company name
         "homepage": "https://www.microsoft.com/" # if no homepage is available, maybe the user's github page
+        "contacts": ["mailto:foo@example.com"] # (optional) list of contact addresses
     },
     "repositories": [ # (optional) list of one or more repositories
         {

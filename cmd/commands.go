@@ -25,4 +25,5 @@ func Execute() {
 	Setup_publicip_Command()
 	Setup_qr_Command()
 	Setup_serve_Command()
+	Setup_update_Command()
 }

@@ -4,11 +4,12 @@
     "maintainer": {
         "name": "Marcel Kloubert",
         "homepage": "https://github.com/mkloubertego",
-        "email": "marcel.kloubert@e-go-mobile.com"
+        "contacts": ["mailto:marcel.kloubert@e-go-mobile.com"]
     },
     "author": {
         "name": "e.GO Mobile",
-        "homepage": "https://e-go-mobile.com/"
+        "homepage": "https://e-go-mobile.com/",
+        "contacts": ["mailto:marcel.kloubert@e-go-mobile.com"]
     },
     "repositories": [
         {

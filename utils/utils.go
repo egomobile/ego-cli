@@ -32,6 +32,22 @@ import (
 //go:embed www/*
 var www embed.FS
 
+// information about the file and folder structre of
+// a GitHub repository
+type GitHubRepoFilesAndFolders struct {
+	// the tree as item list
+	Tree GitHubRepoTree `json:"tree,omitempty"`
+}
+
+// the tree of the GitHub repository
+type GitHubRepoTree = []GitHubRepoTreeItem
+
+// and item of GitHubRepoTree
+type GitHubRepoTreeItem = struct {
+	// the relative path inside the GitHub repository
+	Path string `json:"path,omitempty"`
+}
+
 func BuildHtmlPage(content string, title string, css string, js string) (string, error) {
 	indexHtml, err := GetWWW().ReadFile("www/index.html")
 	if err != nil {
