@@ -21,7 +21,7 @@
     "sources": {
         # keys contain names of systems, separated by comma, if needed
         "debian,ubuntu": { # Ubuntu & Debian
-            "x32,x64": {  # Intel compatible 32 and 64 bit systems
+            "386,amd64": {  # Intel compatible 32 and 64 bit systems
                 "requirements": [ # list of requirements to install BEFORE package is installed
                     "apt://wget",
                     "apt://apt-transport-https"
@@ -35,7 +35,7 @@
             }
         },
         "windows": { # Microsoft Windows
-            "x64": { # only 64 bit systems
+            "amd64": { # only 64 bit systems
                 "source": "winget://Microsoft.VisualStudioCode"
             }
         }

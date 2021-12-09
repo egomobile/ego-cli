@@ -18,7 +18,7 @@
     ],
     "sources": {
         "debian,ubuntu": {
-            "x32,x64": {
+            "386,amd64": {
                 "requirements": [
                     "apt://wget",
                     "apt://apt-transport-https"
@@ -32,7 +32,7 @@
             }
         },
         "windows": {
-            "x64": {
+            "amd64": {
                 "source": "winget://Microsoft.VisualStudioCode"
             }
         }

@@ -48,15 +48,20 @@ func install_execute(args map[string]commando.ArgValue, flags map[string]command
 		goArch := strings.TrimSpace(strings.ToLower(runtime.GOARCH))
 
 		for k, src := range existingPackage.Sources {
-			keys := strings.Split(k, "")
+			keys := strings.Split(k, ",")
 			for _, k := range keys {
 				platform := strings.TrimSpace(strings.ToLower(k))
+
 				if platform == goOS {
 					for k, archItem := range src {
-						architecture := strings.TrimSpace(strings.ToLower(k))
-						if architecture == goArch {
-							existingArchitectureItem = archItem
-							found = true
+						keys := strings.Split(k, ",")
+
+						for _, k := range keys {
+							architecture := strings.TrimSpace(strings.ToLower(k))
+							if architecture == goArch {
+								existingArchitectureItem = archItem
+								found = true
+							}
 						}
 					}
 				}
