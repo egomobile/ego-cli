@@ -26,7 +26,7 @@
                 "source": "https://github.com/egomobile/ego-cli/releases/download/v0.8.0/ego-v0.8.0-linux-arm64.tar.gz"
             }
         },
-        "macos": {
+        "darwin": {
             "x64": {
                 "source": "https://github.com/egomobile/ego-cli/releases/download/v0.8.0/ego-v0.8.0-darwin-amd64.tar.gz"
             }

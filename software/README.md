@@ -29,7 +29,7 @@
                 "source": "apt://code" # source
             }
         },
-        "macos": { # MacOS
+        "darwin": { # MacOS
             "*": { # all systems / architectures
                 "source": "brew://visual-studio-code"
             }

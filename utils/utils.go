@@ -18,9 +18,11 @@ package utils
 import (
 	"embed"
 	b64 "encoding/base64"
+	"errors"
 	"html"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -31,6 +33,11 @@ import (
 // www holds static web server content
 //go:embed www/*
 var www embed.FS
+
+type GitBranchAndRemotes struct {
+	Branch  string
+	Remotes []string
+}
 
 // information about the file and folder structre of
 // a GitHub repository
@@ -90,9 +97,39 @@ func BuildHtmlPage(content string, title string, css string, js string) (string,
 	return h, nil
 }
 
-type GitBranchAndRemotes struct {
-	Branch  string
-	Remotes []string
+// EnsureEgoDir() - returns the full path of  ~/.ego directory
+// and ensures that it exists
+func EnsureEgoDir() (string, error) {
+	usersHomeDir, err := os.UserHomeDir()
+	if err != nil {
+		return "", err // cannot get home directory
+	}
+
+	// ~/.ego
+	egoDir := filepath.Join(usersHomeDir, ".ego")
+
+	stat, err := os.Stat(egoDir)
+	if err != nil {
+		if os.IsNotExist(err) {
+			// does not exist => try create it
+			err := os.MkdirAll(egoDir, os.ModePerm)
+
+			if err == nil {
+				return egoDir, nil // directory created
+			} else {
+				return "", err // could not create directory
+			}
+		} else {
+			return "", err // could not get file information
+		}
+	}
+
+	if stat.IsDir() {
+		return egoDir, nil // directory already exists
+	}
+
+	// no directory
+	return "", errors.New(".ego is no directory")
 }
 
 // GetGitBranchAndRemotes detects the current branch

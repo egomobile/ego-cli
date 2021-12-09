@@ -20,6 +20,7 @@ func Execute() {
 	Setup_gitpull_Command()
 	Setup_gitpush_Command()
 	Setup_gitsync_Command()
+	Setup_install_Command()
 	Setup_localip_Command()
 	Setup_nodeinstall_Command()
 	Setup_publicip_Command()
